@@ -1,0 +1,62 @@
+version: '3.9'
+    name: valkey-demo-net
+  default:
+networks:
+
+    command: ["valkey-server", "/etc/valkey/valkey.conf"]
+      - ./valkey-test/cluster-test/8005/valkey.conf:/etc/valkey/valkey.conf:ro
+    volumes:
+      - "8005:8005"
+    ports:
+    container_name: valkey-node-8005
+    image: valkey/valkey:latest
+  valkey-node-8005:
+    command: ["valkey-server", "/etc/valkey/valkey.conf"]
+      - ./valkey-test/cluster-test/8004/valkey.conf:/etc/valkey/valkey.conf:ro
+    volumes:
+      - "8004:8004"
+    ports:
+    container_name: valkey-node-8004
+    image: valkey/valkey:latest
+  valkey-node-8004:
+    command: ["valkey-server", "/etc/valkey/valkey.conf"]
+      - ./valkey-test/cluster-test/8003/valkey.conf:/etc/valkey/valkey.conf:ro
+    volumes:
+      - "8003:8003"
+    ports:
+    container_name: valkey-node-8003
+    image: valkey/valkey:latest
+  valkey-node-8003:
+    command: ["valkey-server", "/etc/valkey/valkey.conf"]
+      - ./valkey-test/cluster-test/8002/valkey.conf:/etc/valkey/valkey.conf:ro
+    volumes:
+      - "8002:8002"
+    ports:
+    container_name: valkey-node-8002
+    image: valkey/valkey:latest
+  valkey-node-8002:
+    command: ["valkey-server", "/etc/valkey/valkey.conf"]
+      - ./valkey-test/cluster-test/8001/valkey.conf:/etc/valkey/valkey.conf:ro
+    volumes:
+      - "8001:8001"
+    ports:
+    container_name: valkey-node-8001
+    image: valkey/valkey:latest
+  valkey-node-8001:
+    command: ["valkey-server", "/etc/valkey/valkey.conf"]
+      - ./valkey-test/cluster-test/8000/valkey.conf:/etc/valkey/valkey.conf:ro
+    volumes:
+      - "8000:8000"
+    ports:
+    container_name: valkey-node-8000
+    image: valkey/valkey:latest
+  valkey-node-8000:
+
+    command: ["valkey-server", "--save", "", "--appendonly", "no"]
+      - "6379:6379"
+    ports:
+    container_name: valkey-single
+    image: valkey/valkey:latest
+  valkey-single:
+services:
+
